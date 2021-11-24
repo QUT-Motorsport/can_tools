@@ -1,0 +1,219 @@
+---
+family: VESC
+messages:
+  -
+    name: SetDuty
+    id: 0
+    vars:
+      -
+        name: duty
+        type: float
+        size: 32
+        scalar: 100000.0
+  -
+    name: SetCurrent
+    id: 256
+    vars:
+      -
+        name: current
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: SetCurrentBrake
+    id: 512
+    vars:
+      -
+        name: currentBrake
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: SetRPM
+    id: 768
+    vars:
+      -
+        name: rpm
+        type: int32
+        size: 32
+        scalar: 1.0
+  -
+    name: CANStatusPacket
+    id: 1024
+    vars:
+      -
+        name: rpm
+        type: int32
+        size: 32
+        scalar: 1.0
+      -
+        name: current
+        type: float
+        size: 16
+        scalar: 100.0
+      -
+        name: duty
+        type: float
+        size: 16
+        scalar: 1000.0
+  -
+    name: SetCurrentRel
+    id: 1280
+    vars:
+      -
+        name: currentRel
+        type: float
+        size: 32
+        scalar: 100000.0
+  -
+    name: SetCurrentBrakeRel
+    id: 1536
+    vars:
+      -
+        name: currentBrakeRel
+        type: float
+        size: 32
+        scalar: 100000.0
+  
+  -
+    name: SetCurrentHandbrake
+    id: 1792
+    vars:
+      -
+        name: currentHandbrake
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: SetCurrentHandbrakeRel
+    id: 2048
+    vars:
+      -
+        name: currentHandbrakeRel
+        type: float
+        size: 32
+        scalar: 100000.0
+
+  -
+    name: CANStatusPacket2
+    id: 2304
+    vars:
+      -
+        name: ampHoursDrive
+        type: float
+        size: 32
+        scalar: 10000.0
+      -
+        name: ampHoursRegen
+        type: float
+        size: 32
+        scalar: 10000.0
+  -
+    name: CANStatusPacket3
+    id: 2560
+    vars:
+      -
+        name: wattHoursDrive
+        type: float
+        size: 32
+        scalar: 10000.0
+      -
+        name: wattHoursRegen
+        type: float
+        size: 32
+        scalar: 10000.0
+  -
+    name: CANStatusPacket4
+    id: 2816
+    vars:
+      -
+        name: mostfetTemperature
+        type: float
+        size: 16
+        scalar: 10.0
+      -
+        name: motorTemperature
+        type: float
+        size: 16
+        scalar: 10.0
+      -
+        name: inputCurrent
+        type: float
+        size: 16
+        scalar: 10.0
+      -
+        name: pidPos
+        type: float
+        size: 16
+        scalar: 50.0
+  -
+    name: Ping
+    id: 3072
+    vars:
+  -
+    name: Pong
+    id: 3328
+    vars:
+  -
+    name: SetCurrentLimits
+    id: 3584
+    vars:
+      -
+        name: minCurrentLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+      -
+        name: maxCurrentLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: SetCurrentLimitsEEPROM
+    id: 3328
+    vars:
+      -
+        name: minCurrentLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+      -
+        name: maxCurrentLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: SetCurrentInLimits
+    id: 3584
+    vars:
+      -
+        name: minCurrentInLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+      -
+        name: maxCurrentInLimit
+        type: float
+        size: 32
+        scalar: 1000.0
+  -
+    name: CANStatusPacket5
+    id: 3840
+    vars:
+      -
+        name: tachoRPM
+        type: int32
+        size: 32
+        scalar: 1.0
+      -
+        name: inputVoltage
+        type: float
+        size: 16
+        scalar: 10.0
+      -
+        name: reserved
+        type: float
+        size: 16
+        scalar: 1.0
+
+
