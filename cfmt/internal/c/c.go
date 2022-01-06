@@ -42,7 +42,7 @@ func ClangToType(_type string) (string, error) {
 
 func ClangHeaderGuard(family string) []byte {
 	name, err := user.Current()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	return []byte(fmt.Sprintf("#ifndef _%v_CAN_MESSAGES_H_\n#define _%v_CAN_MESSAGES_H_\n\n// Generated on: %v\n// By: %v\n\n", family, family, time.Now(), name.Username))
@@ -78,6 +78,18 @@ func ClangCFile(xml structures.CanXml) []byte {
 		// Get Variables for function decs
 		compose, parse, _ := getVariables(xml.Messages[i].Variables)
 		result += fmt.Sprintf(compose_spec, xml.Family, xml.Messages[i].Name, xml.Family, xml.Messages[i].Name, compose)
+		result += fmt.Sprintf("\t%v_%v_t pack;\n", xml.Family, xml.Messages[i].Name)
+		result += fmt.Sprintf("\tpack.id = 0x%X\n\n", xml.Messages[i].Id)
+		offset := 0
+		for v := 0; v < len(xml.Messages[i].Variables); v++ {
+			result += fmt.Sprintf("\t%v *= %v.f;\n", xml.Messages[i].Variables[v].Name, xml.Messages[i].Variables[v].Scalar)
+		}
+		result += "\n"
+		for v := 0; v < len(xml.Messages[i].Variables); v++ {
+			result += fmt.Sprintf("\tpack.data[%v] = %v; // %v bits\n", offset, xml.Messages[i].Variables[v].Name, xml.Messages[i].Variables[v].Size)
+			offset += xml.Messages[i].Variables[v].Size / 8
+		}
+		result += "\treturn pack;\n"
 		result += func_close
 		result += fmt.Sprintf(parse_spec, xml.Family, xml.Messages[i].Name, parse)
 		result += func_close + "\n"
@@ -86,7 +98,7 @@ func ClangCFile(xml structures.CanXml) []byte {
 }
 
 func getVariables(variables []structures.Vars) (string, string, int) {
-	var compose =""
+	var compose = ""
 	var parse = "uint8_t* data"
 	sumBits := 0
 	for v := 0; v < len(variables); v++ {
@@ -99,9 +111,9 @@ func getVariables(variables []structures.Vars) (string, string, int) {
 		compose += fmt.Sprintf("%v %v, ", typeName, variables[v].Name)
 		parse += fmt.Sprintf("%v* %v, ", typeName, variables[v].Name)
 
-		if v == len(variables) - 1 {
-			compose = compose[:len(compose) - 2]
-			parse = parse[:len(parse) - 2]
+		if v == len(variables)-1 {
+			compose = compose[:len(compose)-2]
+			parse = parse[:len(parse)-2]
 
 		}
 	}
